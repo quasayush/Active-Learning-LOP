@@ -3,7 +3,7 @@ from dataset import get_dataset, get_handler
 from model import get_net
 from torchvision import transforms
 import torch
-from query_strategies import RandomSampling, LeastConfidence, MarginSampling, EntropySampling, \
+from query import RandomSampling, LeastConfidence, MarginSampling, EntropySampling, \
                                 LeastConfidenceDropout, MarginSamplingDropout, EntropySamplingDropout, \
                                 KMeansSampling, KCenterGreedy, BALDDropout, CoreSet, \
                                 AdversarialBIM, AdversarialDeepFool, ActiveLearningByLearning
