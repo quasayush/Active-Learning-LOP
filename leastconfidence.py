@@ -3,7 +3,7 @@ from dataset import get_dataset, get_handler
 from model import get_net
 from torchvision import transforms
 import torch
-from query import KMeansSampling
+from query import LeastConfidence
 # parameters
 SEED = 1
 
@@ -50,7 +50,7 @@ net = get_net(DATA_NAME)
 handler = get_handler(DATA_NAME)
 
 
-strategy = KMeansSampling(X_tr, Y_tr, idxs_lb, net, handler, args)
+strategy = LeastConfidence(X_tr, Y_tr, idxs_lb, net, handler, args)
 
 
 # print info
