@@ -3,11 +3,12 @@ from dataset import get_dataset, get_handler
 from model import get_net
 from torchvision import transforms
 import torch
-from query import RandomSampling
+from query import MarginSampling
+
 # parameters
 SEED = 1
 
-NUM_INIT_LB = 10000
+NUM_INIT_LB = 2000
 NUM_QUERY = 1000
 NUM_ROUND = 10
 
@@ -19,7 +20,7 @@ args_pool = {'MNIST':
                  'loader_tr_args':{'batch_size': 64, 'num_workers': 1},
                  'loader_te_args':{'batch_size': 1000, 'num_workers': 1},
                  'optimizer_args':{'lr': 0.01, 'momentum': 0.5}},
-            
+           
             }
 args = args_pool[DATA_NAME]
 
@@ -50,7 +51,8 @@ idxs_lb[idxs_tmp[:NUM_INIT_LB]] = True
 net = get_net(DATA_NAME)
 handler = get_handler(DATA_NAME)
 
-strategy = RandomSampling(X_tr, Y_tr, idxs_lb, net, handler, args)
+
+strategy = MarginSampling(X_tr, Y_tr, idxs_lb, net, handler, args)
 
 
 # print info

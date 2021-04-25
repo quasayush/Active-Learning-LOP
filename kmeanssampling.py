@@ -3,17 +3,15 @@ from dataset import get_dataset, get_handler
 from model import get_net
 from torchvision import transforms
 import torch
-from query import EntropySampling
-
+from query import KMeansSampling
 # parameters
 SEED = 1
 
-NUM_INIT_LB = 10000
+NUM_INIT_LB = 2000
 NUM_QUERY = 1000
 NUM_ROUND = 10
 
 DATA_NAME = 'MNIST'
-
 
 args_pool = {'MNIST':
                 {'n_epoch': 10, 'transform': transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]),
@@ -52,7 +50,7 @@ net = get_net(DATA_NAME)
 handler = get_handler(DATA_NAME)
 
 
-strategy = EntropySampling(X_tr, Y_tr, idxs_lb, net, handler, args)
+strategy = KMeansSampling(X_tr, Y_tr, idxs_lb, net, handler, args)
 
 
 # print info
